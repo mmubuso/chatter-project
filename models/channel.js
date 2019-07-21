@@ -36,7 +36,7 @@ function getOneChannelById(channelId) {
 
 //Create a Channel
 function createNewChannel(newChannel) {
-  return ChannelCollection.create(channelId)
+  return ChannelCollection.create(newChannel)
 }
 
 //Delete a specific channel
@@ -45,8 +45,8 @@ function deleteChannelById(channelId) {
 }
 
 //Update a specific channel 
-function updateChannelById(channelId) {
-  return ChannelCollection.findByIdAndDelete(channelId)
+function updateChannelById(channelId,newChannel) {
+  return ChannelCollection.findByIdAndUpdate(channelId,newChannel,{new: true})
 }
 
 //Update a specifci channel by its I
