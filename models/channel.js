@@ -1,4 +1,4 @@
-gi// Channel model
+// Channel model
 const mongoose = require('./connection.js')
 
 // Creates schema for model
