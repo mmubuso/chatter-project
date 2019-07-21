@@ -17,8 +17,6 @@ const ChannelModelSchema = new mongoose.Schema({
    type: String
   //  required: true
  }
-  
-
 })
 
 //Name of collection for where channel data will be stored
@@ -44,6 +42,11 @@ function deleteChannelById(channelId) {
   return ChannelCollection.findByIdAndDelete(channelId)
 }
 
+//Delete all channels 
+function deleteAllChannels (){
+  return ChannelCollection.deleteMany()
+}
+
 //Update a specific channel 
 function updateChannelById(channelId,newChannel) {
   return ChannelCollection.findByIdAndUpdate(channelId,newChannel,{new: true})
@@ -55,5 +58,6 @@ module.exports = {
   getOneChannelById,
   createNewChannel,
   deleteChannelById,
-  updateChannelById
+  updateChannelById,
+  deleteAllChannels
 }

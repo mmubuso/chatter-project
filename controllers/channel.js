@@ -23,6 +23,7 @@ channelRouter.get('/:channelId', (req,res) => {
 
 //Path to create a new post
 channelRouter.post('/', (req,res) => {
+  console.log('channel')
   channelApi.createNewChannel(req.body)
     .then(createdChannel => res.send(createdChannel))
     .catch(err => console.log(err))
@@ -34,6 +35,14 @@ channelRouter.put('/:channelId', (req,res) =>{
     .then(updatedChannel => res.send(updatedChannel))
     .catch(err => console.log(err))
 })
+
+//delete an individual channel
+channelRouter.delete('/', (req,res) => {
+  channelApi.deleteAllChannels()
+    .then(()=> res.send('deletedAllchannel'))
+    .catch(err => console.log(err))
+})
+
 
 //delete an individual channel
 channelRouter.delete('/:channelId', (req,res) => {
