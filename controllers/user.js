@@ -16,7 +16,7 @@ userRouter.get('/', (req, res) => {
 
 //Path to get one user
 userRouter.get('/:userId', (req, res) => {
-  userApi.getAllUsers(req.params.userId)
+  userApi.getUserById(req.params.userId)
     .then(user => res.send(user))
     .catch(err => console.log(err))
 })
