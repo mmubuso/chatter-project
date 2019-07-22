@@ -6,6 +6,10 @@ const UserModelSchema = new mongoose.Schema({
   name: {
     type: String,
     required: true
+  },
+  password: {
+    type: String,
+    default: 'password'
   }
 })
 
@@ -29,7 +33,7 @@ function createNewUser (newUser) {
 
 //delete one user
 function deleteUserByID (userId) {
-  return UserCollection.findByIdAndDelete()
+  return UserCollection.findByIdAndDelete(userId)
 }
 
 //delete all users
