@@ -14,7 +14,7 @@ const MessageModelSchema = new mongoose.Schema({
  groupId: {
    type: mongoose.Types.ObjectId
  }
-})
+},{timestamps: true})
 
 //Name of collection for where messages data will be stored
 const MessageCollection = mongoose.model('Message', MessageModelSchema)
