@@ -23,7 +23,6 @@ channelRouter.get('/:channelId', (req,res) => {
 
 //Path to create a new post
 channelRouter.post('/', (req,res) => {
-  console.log('channel')
   channelApi.createNewChannel(req.body)
     .then(createdChannel => res.send(createdChannel))
     .catch(err => console.log(err))

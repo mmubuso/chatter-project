@@ -23,7 +23,6 @@ groupRouter.get('/:groupId', (req,res) => {
 
 //Path to create a new post
 groupRouter.post('/', (req,res) => {
-  console.log('groups')
   groupApi.createNewGroup(req.body, req.params.channelId)
     .then(createdgroup => res.send(createdgroup))
     .catch(err => console.log(err))

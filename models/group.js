@@ -30,7 +30,6 @@ function getOneGroupById(groupId) {
 
 //Create a new group by channelId
 function createNewGroup(newGroups,channelId) {
-  console.log(channelId)
   newGroups.channelId = channelId
   return GroupCollection.create(newGroups)
 }
@@ -40,6 +39,7 @@ function deleteGroupById(groupId) {
   return GroupCollection.findByIdAndDelete(groupId)
 }
 
+//delete all groups
 function deleteAllGroups(){
   return GroupCollection.deleteMany()
 }
