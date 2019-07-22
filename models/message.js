@@ -50,7 +50,7 @@ function updateMessageById(messagesId,newMessages) {
   return MessageCollection.findByIdAndUpdate(messagesId,newMessages,{new: true})
 }
 
-//Update a specifci Messages by its I
+//export all methods
 module.exports = {
   getAllMessages,
   getOneMessageById,
