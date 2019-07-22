@@ -5,6 +5,7 @@ const app = express()
 //import router from controller
 const { channelRouter } = require('./controllers/channel.js')
 const { groupRouter } = require('./controllers/group.js')
+const { messageRouter } = require('./controllers/message.js')
 
 
 
@@ -24,6 +25,8 @@ app.use(express.static(`${__dirname}/client/build`))
 //add router for express to use
 app.use('/api/channels', channelRouter)
 app.use('/api/channels/:channelId/groups', groupRouter)
+app.use('/api/channels/:channelId/groups/:groupId/messages', messageRouter)
+// app.use('/api/users/', userRouter)
 
 
 //catches all other get requests that arent aimed at our APIs
