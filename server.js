@@ -6,28 +6,22 @@ const app = express()
 const { channelRouter } = require('./controllers/channel.js')
 const { groupRouter } = require('./controllers/group.js')
 const { messageRouter } = require('./controllers/message.js')
-
-
+const { userRouter } = require('./controllers/user.js')
 
 //Used to parse the body of the HTTP requests from a URL encoded string 
 app.use(express.urlencoded({extended: true}))
 
-
  //Used to parse the body of the HTTP requests from a JSON string  
 app.use(express.json())
 
-
-
 //use the `./client/build` directory to host static resources such as css and js
 app.use(express.static(`${__dirname}/client/build`))
-
 
 //add router for express to use
 app.use('/api/channels', channelRouter)
 app.use('/api/channels/:channelId/groups', groupRouter)
 app.use('/api/channels/:channelId/groups/:groupId/messages', messageRouter)
-// app.use('/api/users/', userRouter)
-
+app.use('/api/users/', userRouter)
 
 //catches all other get requests that arent aimed at our APIs
 app.get('/*', (req, res) => {
