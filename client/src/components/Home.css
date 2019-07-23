@@ -1,0 +1,10 @@
+/* Style sheet for home compoennt */
+/* Container for Home component */
+.HomeContainer {
+    height: 75vh;
+}
+
+/* style row */
+#root .row{
+    margin-right: 0;
+}
