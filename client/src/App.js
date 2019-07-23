@@ -1,14 +1,20 @@
 import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
-import HelloWorld from './components/HelloWorld.js'
 import './App.css';
+import NavBar from './components/NavBar.js';
+import Channel from './components/ChannelContainer.js'
+import Home from './components/Home.js';
 
 function App() {
   return (
     <div className="App">
       <Router>
+        <NavBar />
         <Switch>
-          <Route exact path="/" component={HelloWorld}/>
+          {/* Display Channels page */}
+          <Route exact path="/" component={Home}/>
+          <Route path='/channels' component={Channel}/>
+          {/* Display groups and message */}
         </Switch>
       </Router>
     </div>

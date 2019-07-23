@@ -1,16 +1,19 @@
 import React, { Component } from 'react'
 import axios from 'axios'
+import SignUp from './SignUp.js'
 
-export default class SignUp extends Component {
+
+export default class Home extends Component {
 
     state = {
         user: {
             name: 'amoo',
             password: 'newStuff'
         },
-        showSignUp: true
+        showSignUp: false
     }
 
+    //methods are ran when the component runs
     componentDidMount() {
         this.updateLocalStorageWithUserInfo()
     }
@@ -19,14 +22,14 @@ export default class SignUp extends Component {
     createUserInfo = (userObject) => {
         axios.post('/api/users', userObject)
             .then(res => {
-                this.setState({user: res.data})
+                this.setState({ user: res.data })
             })
     }
 
     //hid or show the sign up page
     toggleShowSignUp = (event) => {
-        this.setState((state,) => {
-            this.setState({showSignUp: !state.showSignUp})
+        this.setState((state, ) => {
+            this.setState({ showSignUp: !state.showSignUp })
         })
     }
 
@@ -34,19 +37,24 @@ export default class SignUp extends Component {
     getUserInfo = (userId) => {
         axios.get(`/api/users/${userId}`)
             .then(res => {
-                this.setState({user: res.data})
+                this.setState({ user: res.data })
             })
     }
 
     //upload or replace user information to localStorage
     updateLocalStorageWithUserInfo = () => {
         let userJSONOBject = JSON.stringify(this.state.user)
-        localStorage.setItem("userInfo",userJSONOBject)
+        localStorage.setItem("userInfo", userJSONOBject)
     }
 
     render() {
+        let { showSignUp, user } = this.state
         return (
-            <h1>Hello</h1>
+            showSignUp
+                ?
+                <h1>Hello</h1>
+                :
+                <SignUp />
         )
     }
 }
