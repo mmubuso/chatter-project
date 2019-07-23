@@ -1,8 +1,6 @@
+/* change aligment of h2 and p tag */
 #channelsContainer h2,#channelsContainer p{
     text-align: left;
-}
-
-#channelsContainer a h2{
     text-decoration: none;
     color: black;
 }
