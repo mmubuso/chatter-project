@@ -1,0 +1,7 @@
+/* Style for NavBar component */
+
+/* Style for the anchor tags */
+#root .navbar a {
+    color: white;
+    text-decoration: none;
+}
