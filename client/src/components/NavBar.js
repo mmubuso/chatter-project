@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
-import {
-    BrowserRouter as Router,
-    Link
-} from 'react-router-dom';
+import { Link } from 'react-router-dom'
+
 import {
     Navbar,
     Nav,
@@ -16,7 +14,7 @@ export default class NavBar extends Component {
 
         return (
 
-            <Router>
+            <div>
                 <Navbar color="dark" light expand="md">
                     <Link
                         to='/'
@@ -37,7 +35,7 @@ export default class NavBar extends Component {
                         </NavItem>
                     </Nav>
                 </Navbar>
-            </Router >
+            </div >
         )
     }
 }
