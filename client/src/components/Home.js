@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import axios from 'axios'
 import SignUp from './SignUp.js'
-
+import './Home.css'
 
 export default class Home extends Component {
 
@@ -50,11 +50,16 @@ export default class Home extends Component {
     render() {
         let { showSignUp, user } = this.state
         return (
-            showSignUp
-                ?
-                <h1>Hello</h1>
-                :
-                <SignUp />
+
+            <div className='row HomeContainer justify-content-center align-items-center' >
+                {
+                    showSignUp
+                        ?
+                        <h1>Welcome to Chatter</h1>
+                        :
+                        <SignUp createUser={this.createUserInfo} />
+                }
+            </div>
         )
     }
 }
