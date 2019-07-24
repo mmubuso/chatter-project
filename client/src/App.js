@@ -4,7 +4,7 @@ import './App.css';
 import NavBar from './components/NavBar.js';
 import Channel from './components/ChannelContainer.js'
 import Home from './components/Home.js';
-import Group from './components/Group.js'
+import Group from './components/GroupsListContainer.js'
 
 function App() {
 
@@ -16,6 +16,7 @@ function App() {
         <Switch>
           {/* Display Channels page */}
           <Route exact path="/" render={HomeComponent}/>
+          <Route path='/channels/:channelId' component={Group}/>
           <Route path='/channels' component={Channel}/>
           {/* Display groups and message */}
         </Switch>

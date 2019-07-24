@@ -6,7 +6,7 @@ export default class Channel extends Component {
         return (
             <div>
                 <hr className="my-2" />
-                <Link to={`/groups/${this.props.channelId}`}><h2>{this.props.name}</h2></Link>
+                <Link to={`/channels/${this.props.channelId}`}><h2>{this.props.name}</h2></Link>
                 <p className="lead">Description: {this.props.description}</p>
             </div>
         )
