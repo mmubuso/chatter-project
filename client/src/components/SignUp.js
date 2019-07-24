@@ -12,11 +12,14 @@ export default class SignUp extends Component {
     //  in the database
     createObject = (event) => {
         event.preventDefault()
-        console.log(this.name)
-        this.props.createUser({
-            name: this.name.value,
-            password: this.password.value
-        })
+        if (this.name.value !== '' && this.password.value !== '') {
+            this.props.createUser({
+                name: this.name.value,
+                password: this.password.value
+            })
+            this.props.removeSignUp()
+        }else{
+        }
     }
 
     render() {
@@ -24,7 +27,7 @@ export default class SignUp extends Component {
 
             <Form
                 className='col-md-8 col-xs-12'>
-                <h1 className='display-4'>Create An Account</h1>
+                <h1 className='display-3'>Create An Account</h1>
                 <FormGroup className="row mb-2 mr-sm-0 mt-sm-0 row" >
                     <Col xs={3} lg={2} >
                         <Label for="new-name" className="col-xs- mr-sm-0">Name</Label>
@@ -38,8 +41,9 @@ export default class SignUp extends Component {
                             type="name"
                             name="name"
                             id="new-name"
-                            placeholder="Name "
-                             />
+                            placeholder="Name"
+                            required
+                        />
                     </Col>
                 </FormGroup>
                 <FormGroup row className="mb-2 mr-sm-0 mb-sm-0 row">
