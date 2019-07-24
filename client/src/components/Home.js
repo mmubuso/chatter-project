@@ -29,13 +29,13 @@ export default class Home extends Component {
 
     //check if user has account
     checkIfUserIsLoggedIn = () => {
-        if(JSON.parse(localStorage.getItem("userInfo")) !== null){
+        if (JSON.parse(localStorage.getItem("userInfo")) !== null) {
             this.updateStateWithLocalStorageInfo()
             this.toggleShowSignUp()
         }
     }
 
-    
+
 
     //hid or show the sign up page
     toggleShowSignUp = () => {
@@ -62,7 +62,7 @@ export default class Home extends Component {
     //update state with information from localStorage
     updateStateWithLocalStorageInfo = () => {
         let newUserObject = JSON.parse(localStorage.getItem("userInfo"))
-        this.setState({user: newUserObject})
+        this.setState({ user: newUserObject })
     }
 
     render() {
@@ -74,9 +74,9 @@ export default class Home extends Component {
                     showSignUp
                         ?
                         <h1
-                        className="col-md-8"
-                        >
-                            Welcome to Chatter, {user.name}</h1>
+                            className="col-md-8">
+                            Welcome to Chatter, {user.name}
+                        </h1>
                         :
                         <SignUp
                             createUser={this.createUserInfo}
