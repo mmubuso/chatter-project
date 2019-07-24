@@ -15,21 +15,32 @@ export default class Home extends Component {
 
     //methods are ran when the component runs
     componentDidMount() {
-        this.updateLocalStorageWithUserInfo()
+        this.checkIfUserIsLoggedIn()
     }
 
     //create a user 
     createUserInfo = (userObject) => {
+        this.updateLocalStorageWithUserInfo(userObject)
         axios.post('/api/users', userObject)
             .then(res => {
                 this.setState({ user: res.data })
             })
     }
 
+    //check if user has account
+    checkIfUserIsLoggedIn = () => {
+        if(JSON.parse(localStorage.getItem("userInfo")) !== null){
+            this.updateStateWithLocalStorageInfo()
+            this.toggleShowSignUp()
+        }
+    }
+
+    
+
     //hid or show the sign up page
-    toggleShowSignUp = (event) => {
-        this.setState((state, ) => {
-            this.setState({ showSignUp: !state.showSignUp })
+    toggleShowSignUp = () => {
+        this.setState((state) => {
+            return { showSignUp: !state.showSignUp }
         })
     }
 
@@ -37,14 +48,21 @@ export default class Home extends Component {
     getUserInfo = (userId) => {
         axios.get(`/api/users/${userId}`)
             .then(res => {
+                this.updateLocalStorageWithUserInfo(res.data)
                 this.setState({ user: res.data })
             })
     }
 
-    //upload or replace user information to localStorage
-    updateLocalStorageWithUserInfo = () => {
-        let userJSONOBject = JSON.stringify(this.state.user)
-        localStorage.setItem("userInfo", userJSONOBject)
+    //upload user information to localStorage
+    updateLocalStorageWithUserInfo = (userOBject) => {
+        userOBject = JSON.stringify(userOBject)
+        localStorage.setItem("userInfo", userOBject)
+    }
+
+    //update state with information from localStorage
+    updateStateWithLocalStorageInfo = () => {
+        let newUserObject = JSON.parse(localStorage.getItem("userInfo"))
+        this.setState({user: newUserObject})
     }
 
     render() {
@@ -55,9 +73,14 @@ export default class Home extends Component {
                 {
                     showSignUp
                         ?
-                        <h1>Welcome to Chatter</h1>
+                        <h1
+                        className="col-md-8"
+                        >
+                            Welcome to Chatter, {user.name}</h1>
                         :
-                        <SignUp createUser={this.createUserInfo} />
+                        <SignUp
+                            createUser={this.createUserInfo}
+                            removeSignUp={this.toggleShowSignUp} />
                 }
             </div>
         )
