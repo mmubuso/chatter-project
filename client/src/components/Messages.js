@@ -1,33 +1,15 @@
 import React, { Component } from 'react'
 import axios from 'axios';
+import Message from './Message.js'
 
 export default class Messages extends Component {
 
-    state = {
-        messages: [],
-        currentUser: 'Anon'
-    }
-
-    //
-    componentDidMount() {
-        this.getAllMessagesByGroupId()
-        this.updateUserInfoWithLocalStorage()
-    }
-
-
-    //Get all the messages for this group
-    getAllMessagesByGroupId = () => {
-        axios.get(`/api/channels/${this.props.activeGroup.channelId}/groups/${this.props.activeGroup._id}/messages`)
-            .then(res => {
-                this.setState({ messages: res.data })
+    //Edit a message
+    editMessage = (messageId, newMessage) => {
+        axios.put(`/api/channels/${this.props.activeGroup.channelId}/groups/${this.props.activeGroup._id}/messages/${messageId}`, newMessage)
+            .then(() => {
+                this.props.getAllMessagesByGroupId()
             })
-            .catch(err => console.log('Error' + err))
-    }
-
-    //create method to pull user info from localStorage
-    updateUserInfoWithLocalStorage = () => {
-        let userInfo = JSON.parse(localStorage.getItem('userInfo'))
-        this.setState({ currentUser: userInfo.name })
     }
 
     //create a Message
@@ -36,29 +18,44 @@ export default class Messages extends Component {
         if (this.input.value !== '') {
             axios.post(`/api/channels/${this.props.activeGroup.channelId}/groups/${this.props.activeGroup._id}/messages`,
                 {
-                    user: this.state.currentUser,
+                    user: this.props.currentUser,
                     message: this.input.value
                 }
             )
             this.input.value = ''
-            this.getAllMessagesByGroupId()
+            this.props.getAllMessagesByGroupId()
         }
     }
+
+    //delete a message
+    deleteMessage = (messageId) => {
+        console.log(messageId)
+        axios.delete(`/api/channels/${this.props.activeGroup.channelId}/groups/${this.props.activeGroup._id}/messages/${messageId}`)
+            .then(() => {
+                this.props.getAllMessagesByGroupId()
+            })
+    }
+
     render() {
 
-        let messagesList = this.state.messages.map(message => {
+        let messagesList = this.props.messages.map(message => {
             return (
-                <div>
-                    <p><span>{message.user}</span>: {message.message}</p>
-                </div>
+                <Message
+                    key={message._id}
+                    id={message._id}
+                    user={message.user}
+                    message={message.message}
+                    editMessage={this.editMessage}
+                    deleteMessage={this.deleteMessage}
+                />
             )
         })
 
         return (
-            <div className='col-md-9'>
+            <div className='col-md-8'>
                 <h1>{this.props.activeGroup.name}</h1>
                 {messagesList}
-                <form onSubmit={this.createMessage}> 
+                <form onSubmit={this.createMessage}>
                     <input
                         type='text'
                         ref={inputElement =>
