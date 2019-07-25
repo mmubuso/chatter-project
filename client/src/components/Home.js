@@ -74,7 +74,7 @@ export default class Home extends Component {
                     showSignUp
                         ?
                         <h1
-                            className="col-md-8">
+                            className="display-3 col-md-8">
                             Welcome to Chatter, {user.name}
                         </h1>
                         :
