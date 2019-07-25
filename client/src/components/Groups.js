@@ -13,7 +13,7 @@ export default class Groups extends Component {
             )
         })
         return (
-            <div className='col-md-4'>
+            <div className='col-md-3'>
                 <h1>Hello Groups</h1>
                 {listOfGroups}
             </div>
