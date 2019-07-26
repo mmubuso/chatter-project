@@ -1,0 +1,28 @@
+.group {
+    height: 75vh;
+    border-radius: 1em;
+    border: 1px solid gray;
+    background: rgb(32, 32, 32);
+    text-align: left;
+    padding: 0.2em;
+    margin: 0 auto;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.groupItem {
+    border-top: 1px solid gray;
+    height: fit-content;
+}
+
+.groupItem:hover{
+    background-color: rgb(46, 46, 46);
+}
+
+.groupItem h2{
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+
