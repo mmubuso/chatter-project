@@ -8,7 +8,8 @@ export default class Home extends Component {
     state = {
         user: {
             name: 'amoo',
-            password: 'newStuff'
+            password: 'newStuff',
+            _id: ''
         },
         showSignUp: false
     }
@@ -20,10 +21,10 @@ export default class Home extends Component {
 
     //create a user 
     createUserInfo = (userObject) => {
-        this.updateLocalStorageWithUserInfo(userObject)
         axios.post('/api/users', userObject)
             .then(res => {
                 this.setState({ user: res.data })
+                this.updateLocalStorageWithUserInfo(res.data)
             })
     }
 
