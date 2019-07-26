@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import axios from 'axios'
 import Groups from './Groups.js'
 import Messages from './Messages.js'
+import './GroupsListContainer.css'
 
 export default class GroupsListContainer extends Component {
 
@@ -80,7 +81,7 @@ export default class GroupsListContainer extends Component {
 
 
         return (
-            <div className='row'>
+            <div className='GroupsListContainer row'>
                 <h1 className='display-3 col-12'>{name}</h1>
                 <Groups
                     groups={this.state.groupsList}
