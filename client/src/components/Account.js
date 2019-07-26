@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import './Account.css'
-import { get } from 'http';
 import axios from 'axios';
 import { Redirect } from 'react-router-dom'
 
@@ -57,9 +56,16 @@ export default class Account extends Component {
         axios.delete(`/api/users/${this.state.user._id}`)
             .then(() => {
                 localStorage.removeItem("userInfo")
+                this.redirectToHomePageToggle()
             })
     }
 
+    //Method to toggle redirect
+    redirectToHomePageToggle = () => {
+        this.setState(state => {
+            return { redirectToHomePage: !state.redirectToHomePage }
+        })
+    }
 
     render() {
 
