@@ -77,7 +77,7 @@ export default class GroupsListContainer extends Component {
     render() {
 
         //Destructure channel object
-        let { name, description, color, password, _id } = this.state.channel
+        let { name} = this.state.channel
 
 
         return (
