@@ -2,12 +2,14 @@ import React, { Component } from 'react'
 import './Account.css'
 import { get } from 'http';
 import axios from 'axios';
+import { Redirect } from 'react-router-dom'
 
 export default class Account extends Component {
 
     state = {
         showEditForm: false,
         user: {},
+        redirectToHomePage: false
     }
 
     componentDidMount() {
@@ -37,22 +39,33 @@ export default class Account extends Component {
     //Update db with new information
     updateUserInformationInDatabase = (event) => {
         event.preventDefault()
-        axios.put(`/api/users/${this.state.user._id}`,{
-            name: this.name.value,
-            password: this.password.value
-        })
-        .then(res => {
-            console.log('res')
-            this.updateLocalStorageWithUserInfo(res.data)
-            this.setState({showEditForm: false})
-        })
+        if (this.name.value !== '') {
+            axios.put(`/api/users/${this.state.user._id}`, {
+                name: this.name.value,
+                password: this.password.value
+            })
+                .then(res => {
+                    this.updateLocalStorageWithUserInfo(res.data)
+                    this.setState({ showEditForm: false })
+                })
+        }
     }
+
+    //Delete an account from DB and local storage
+    deleteAccount = (event) => {
+        event.preventDefault()
+        axios.delete(`/api/users/${this.state.user._id}`)
+            .then(() => {
+                localStorage.removeItem("userInfo")
+            })
+    }
+
 
     render() {
 
 
         //destructure state
-        let { showEditForm, dataBaseUser, user } = this.state
+        let { showEditForm, redirectToHomePage, user } = this.state
 
 
         return (
@@ -65,14 +78,14 @@ export default class Account extends Component {
                         <form className='accountForm mt-4 col-xs-12 col-md-6'>
                             <div className='row'>
                                 <label className='col-md-4' htmlFor='nameInput'>Name</label>
-                                <input ref={a => this.name = a}className='col-md-8 input form-control' id='nameInput' />
+                                <input ref={a => this.name = a} className='col-md-8 input form-control' id='nameInput' />
                             </div>
                             <div className='row'>
                                 <label className='col-md-4' htmlFor='new-password'>Password</label>
-                                <input ref={a => this.password = a}className='col-md-8 input form-control mt-1' id='new-password' />
+                                <input ref={a => this.password = a} className='col-md-8 input form-control mt-1' id='new-password' />
                             </div>
                             <div className=' mt-4'>
-                                <button onClick={event => this.updateUserInformationInDatabase(event)}className='btn btn-success'> Submit</button>
+                                <button onClick={event => this.updateUserInformationInDatabase(event)} className='btn btn-success'> Submit</button>
                                 <button onClick={(event) => this.toggleEditForm(event)} className='btn btn-danger ml-4'> Cancel</button>
                             </div>
                         </form>
@@ -80,7 +93,7 @@ export default class Account extends Component {
                         <form className='accountForm mt-4 col-xs-12 col-md-6'>
                             <div className='row justify-content-center'>
                                 <label className='col-xs-2  col-md-4  ' htmlFor='nameInput'>Name</label>
-                                <p className='col-xs-3 lead col-md-4' id='nameInput'></p>
+                                <p className='col-xs-3 lead col-md-4' id='nameInput'>{user.name}</p>
                             </div>
                             <div className='row justify-content-center'>
                                 <label className='col-xs-2 col-md-4 ' htmlFor='new-password'>Password</label>
@@ -88,14 +101,17 @@ export default class Account extends Component {
                             </div>
                             <div className=' mt-4'>
                                 <button className='btn btn-success' onClick={(event) => this.toggleEditForm(event)}> Edit</button>
-                                <button className='btn btn-danger ml-4'> Delete</button>
+                                <button className='btn btn-danger ml-4' onClick={(event) => this.deleteAccount(event)}> Delete</button>
                             </div>
                         </form>
+
                 }
-
-
-
-
+                {
+                    redirectToHomePage
+                        ?
+                        <Redirect to='/' />
+                        :
+                        null}
             </div>
         )
     }
