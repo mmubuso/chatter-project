@@ -32,7 +32,18 @@ export default class GroupsListContainer extends Component {
             () => {
                 this.getAllMessagesByGroupId()
                 this.showMessages()
+                this.runSetInterval()
             })
+    }
+
+    //Get new messages
+    runSetInterval = () => {
+        setInterval(this.getAllMessagesByGroupId,1500)
+    }
+
+    //Clear the set interval
+    clearSetInterval = () => {
+        window.clearInterval()
     }
 
     //toggle messages 
@@ -95,6 +106,7 @@ export default class GroupsListContainer extends Component {
                             messages={this.state.messages}
                             currentUser={this.state.currentUser}
                             getAllMessagesByGroupId={this.getAllMessagesByGroupId}
+                            clearThisInterval={this.clearSetInterval}
                         />
                         : null
                 }
