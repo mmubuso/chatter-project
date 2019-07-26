@@ -1,0 +1,28 @@
+/* style for entire message boy */
+.MessageBody {
+    /* background-color: bisque; */
+    margin-top: 0.5em;
+}
+
+/* Style button elements */
+.MsgBtn {
+    display: inline-block;
+    text-align: right;
+    font-size: 1.5em;
+}
+
+/* Style text in message */
+.descriptionMessage {
+    background-color: rgba(0, 0, 179, 0.493);
+    border-top-right-radius: 1em; 
+    border-bottom-right-radius: 1em;
+}
+
+/* */
+.userMessage {
+    background-color: rgba(0, 0, 179, 0.493);
+    border-top-left-radius: 1em; 
+    border-bottom-left-radius: 1em;
+    margin-right: 0.2em;
+}
+
