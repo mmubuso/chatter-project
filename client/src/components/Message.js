@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+import './Message.css'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faEdit, faTrashAlt, faCheckCircle } from '@fortawesome/free-solid-svg-icons'
 
 export default class Message extends Component {
 
@@ -24,60 +27,66 @@ export default class Message extends Component {
         this.setState({ newMessage: messageObject })
     }
 
+    //Handle message updates
     handleMessageUpdate = () => {
         console.log('test 1')
         this.props.editMessage(this.props.id, this.state.newMessage)
         this.toggleEditMode()
     }
 
-    
+
     render() {
 
         //destructure props
-        let { user, deleteMessage , id} = this.props
+        let { user, deleteMessage, id } = this.props
 
         return (
-            <div className="row">
-                <div className="col-md-4">{user}</div>
-                <div className="col-md-8">
+            <div className="MessageBody row justify-content-center">
+                <div className="userMessage col-md-2">{user}</div>
+                <div className="descriptionMessage col-md-9">
 
                     {
                         //Show input or text tag
                         this.state.canEditMessage
                             ?
-                            <div>
+                            <div className='row'>
                                 <input
+                                    className='col-md-10 messageEditField'
                                     type='text'
                                     value={this.state.newMessage.message}
                                     onChange={this.handleOnChangeFromInputForm}
                                 />
-                                <input
-                                    type='submit'
-                                    //Update or edit message
-                                    onClick={this.handleMessageUpdate}
-                                    className='btn-success'
-                                    value='Submit'
-                                />
+                                <div className='col-md-2 buttonsFA'>
+                                    <FontAwesomeIcon icon={faCheckCircle}
+                                        //Update or edit message
+                                        onClick={this.handleMessageUpdate}
+                                        className='MsgBtn faCheckCircleButton'
+                                    />
+                                    <FontAwesomeIcon icon={faTrashAlt}
+                                        className='MsgBtn faTrashAltButton'
+                                        onClick={() => deleteMessage(id)}
+                                    />
+                                </div>
                             </div>
                             :
-                            <div>
-                                <p>{this.state.newMessage.message}</p>
-                                <input
-                                    type='submit'
-                                    //Update or edit message
-                                    onClick={this.toggleEditMode}
-                                    className='btn-success'
-                                    value='Edit'
-                                />
+                            <div className='row'>
+                                <p className='col-md-10 messageText'>{this.state.newMessage.message}</p>
+                                <div className='col-md-2 buttonsFA'>
+                                    <FontAwesomeIcon icon={faEdit}
+                                        //Update or edit message
+                                        onClick={this.toggleEditMode}
+                                        className='MsgBtn faEditButton'
+
+                                    />
+                                    <FontAwesomeIcon icon={faTrashAlt}
+                                        className='MsgBtn faTrashAltButton'
+                                        onClick={() => deleteMessage(id)}
+                                    />
+                                </div>
                             </div>
                     }
 
-                    <input
-                        type='submit'
-                        color="danger"
-                        onClick={() => deleteMessage(id)}
-                        value='Delete'
-                    />
+
                 </div>
             </div>
         )
