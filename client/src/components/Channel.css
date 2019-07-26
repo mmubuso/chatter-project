@@ -2,5 +2,13 @@
 #channelsContainer h2,#channelsContainer p{
     text-align: left;
     text-decoration: none;
-    color: black;
+    color: white;
+}
+#channelsContainer h1{
+    color: white;
+}
+
+/* Channel messenger */
+#channelsContainer {
+    background-color:  rgb(32, 32, 32);
 }
