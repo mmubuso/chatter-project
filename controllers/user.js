@@ -31,7 +31,7 @@ userRouter.post('/', (req, res) => {
 //path to update a user
 userRouter.put('/:userId', (req, res) => {
   userApi.updateUserById(req.params.userId,req.body)
-    .then(() => res.json('User was updated'))
+    .then((user) => res.json(user))
     .catch(err => console.log(err))
 })
 
