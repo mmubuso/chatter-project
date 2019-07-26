@@ -30,7 +30,7 @@ export default class NavBar extends Component {
                         navbar>
                         <NavItem>
                             <Link
-                                to="/accounts">Account
+                                to="/account">Account
                             </Link>
                         </NavItem>
                     </Nav>
