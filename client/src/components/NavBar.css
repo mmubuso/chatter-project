@@ -5,3 +5,7 @@
     color: white;
     text-decoration: none;
 }
+
+#root .navbar{
+    background-color: rgb(32, 32, 32);
+}

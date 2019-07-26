@@ -15,7 +15,7 @@ export default class NavBar extends Component {
         return (
 
             <div>
-                <Navbar color="dark" light expand="md">
+                <Navbar  light expand="md">
                     <Link
                         to='/'
                         className='LinkTags '>
