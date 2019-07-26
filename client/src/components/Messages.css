@@ -1,0 +1,43 @@
+.Messages {
+    height: 75vh;
+    border-radius: 1em;
+    border: 1px solid gray;
+    background: rgb(32, 32, 32);
+    text-align: left;
+    padding: 0.2em;
+    margin: 0 auto;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.Messages h1{
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+/* Input field */
+#root .MessageInputField {
+    width: 85%;
+    display: inline-block;
+}
+
+/* submit button */
+#root .MessageSubmitButton {
+    width: 10%;
+    color: white;
+    border-radius: 1em;
+    border: 1px solid gray;
+    background: rgb(32, 32, 32);
+    margin: 0 2%;
+}
+
+.MessagesContainer {
+    height: 50vh;
+    background:  rgb(29, 29, 29);
+    overflow-y: auto;
+    overflow-x: hidden;
+    border-radius: 1em;
+    padding: 1em;
+    border: 1px solid gray;
+}

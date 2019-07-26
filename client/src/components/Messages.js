@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import axios from 'axios';
 import Message from './Message.js'
+import './Messages.css'
 
 export default class Messages extends Component {
 
@@ -29,14 +30,30 @@ export default class Messages extends Component {
 
     //delete a message
     deleteMessage = (messageId) => {
-        console.log(messageId)
         axios.delete(`/api/channels/${this.props.activeGroup.channelId}/groups/${this.props.activeGroup._id}/messages/${messageId}`)
             .then(() => {
                 this.props.getAllMessagesByGroupId()
             })
     }
 
+    componentDidUpdate() {
+        this.setScrollToBottomOfMessageContainer()
+    }
+   
+    //remove clear when component is unmounted
+    componentWillUnmount = () => {
+        window.this.props.clearThisInterval()
+    }
+
+    //Show newest images located at the bottom
+    setScrollToBottomOfMessageContainer = () => {
+        this.messegesContainer.scrollTop = 990000
+    }
+
+
     render() {
+
+       
 
         let messagesList = this.props.messages.map(message => {
             return (
@@ -51,18 +68,27 @@ export default class Messages extends Component {
             )
         })
 
+
         return (
-            <div className='col-md-8'>
+            <div className='Messages col-md-8'>
                 <h1>{this.props.activeGroup.name}</h1>
-                {messagesList}
-                <form onSubmit={this.createMessage}>
+                <div
+                    ref={a => this.messegesContainer = a}
+                    className="MessagesContainer">
+                    {messagesList}
+                </div>
+                <form
+                    className='messageForm'
+                    onSubmit={this.createMessage}>
                     <input
+                        className='MessageInputField form-control'
                         type='text'
                         ref={inputElement =>
                             this.input = inputElement}
                     />
-                    <submit onClick={(evt) => this.createMessage(evt)} >Send</submit>
+                    <button className='btn MessageSubmitButton' onClick={(evt) => this.createMessage(evt)} >Send</button>
                 </form>
+
             </div>
         )
     }
