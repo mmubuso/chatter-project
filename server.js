@@ -1,6 +1,7 @@
 //import express framework
 const express = require('express')
 const app = express()
+const socket = require('socket.io')
 
 //import router from controller
 const { channelRouter } = require('./controllers/channel.js')
@@ -32,6 +33,13 @@ app.get('/*', (req, res) => {
 const PORT = process.env.PORT || 3001
 
 //Set por tthat the server will be listening on
-app.listen(PORT, () => {
+const server = app.listen(PORT, () => {
     console.log(`App is listening on PORT ${PORT}`)
 })
+
+const io = socket(server)
+
+io.on("connection", (socket) => {
+    console.log('Connected to socket')
+})
+
