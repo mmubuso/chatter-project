@@ -3,7 +3,7 @@
 General Assembly SEI July 29th  - Project 3
 
 
-- Project: https://sheltered-wave-65247.herokuapp.com/ 
+- Deployed Application: https://chatter-project.herokuapp.com/
 - Trello Board: https://trello.com/b/w1mFS8ot/project-3
 - GitHub: https://github.com/mmubuso/chatter-project
 
