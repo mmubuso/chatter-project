@@ -3,6 +3,8 @@ import axios from 'axios';
 import Message from './Message.js'
 import './Messages.css'
 import io from 'socket.io-client'
+import { faPaperPlane } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 export default class Messages extends Component {
 
@@ -15,7 +17,7 @@ export default class Messages extends Component {
     }
 
     //create a Message
-  
+
 
     //delete a message
     deleteMessage = (messageId) => {
@@ -29,7 +31,7 @@ export default class Messages extends Component {
     componentDidUpdate() {
         this.setScrollToBottomOfMessageContainer()
     }
-   
+
     //start listening for data from socket
     componentDidMount() {
         this.getMessageFromWebSocketServer()
@@ -80,7 +82,7 @@ export default class Messages extends Component {
 
 
         return (
-            <div className='Messages col-md-8'>
+            <div className='Messages col-md-7'>
                 <h1>{this.props.activeGroup.name}</h1>
                 <div
                     ref={a => this.messegesContainer = a}
@@ -88,17 +90,19 @@ export default class Messages extends Component {
                     {messagesList}
                 </div>
                 <form
-                    className='messageForm'>
+                    onSubmit={(event => this.sendMessageToWebSocketServer(event, this.input.value))}
+                    className='messageForm mt-3'>
                     <input
                         className='MessageInputField form-control'
                         type='text'
+                        placeholder='Start typing'
                         ref={inputElement =>
                             this.input = inputElement}
                     />
-                    <button
+                    <FontAwesomeIcon icon={faPaperPlane}
                         className='btn MessageSubmitButton'
-                        onClick={(evt) => this.sendMessageToWebSocketServer(evt, this.input.value)}>
-                        Send</button>
+                        onClick={(evt) => this.sendMessageToWebSocketServer(evt, this.input.value)}
+                    />
                 </form>
 
             </div>

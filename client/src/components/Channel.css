@@ -12,3 +12,9 @@
 #channelsContainer {
     background-color:  rgb(32, 32, 32);
 }
+
+/* fade channel  option on hover */
+#channelsContainer .ChannelLink:hover,a:hover{
+    opacity: 0.3 ;
+    text-decoration: none !important;
+}

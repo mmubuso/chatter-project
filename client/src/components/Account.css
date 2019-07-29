@@ -1,7 +1,22 @@
-.accountPage {
-    height: 55vh
+#root .accountPage {
+    height: 45vh;
+    background-color: black;
 }
 
 .accountPage form{
-    height: 200px;
+    height: fit-content;
+    background-color: rgb(32, 32, 32);
+    padding-bottom: 3em;
+    border-radius: 0.2em;
+}
+
+.buttonContainer .btn{
+    width: 5em;
+    background-color: transparent;
+    color: white !important;
+    border: 1px solid white;
+}
+
+.buttonContainer .btn:hover{
+    background-color: black;
 }

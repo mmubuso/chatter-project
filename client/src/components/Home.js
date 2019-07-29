@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import axios from 'axios'
 import SignUp from './SignUp.js'
 import './Home.css'
+import aolSound from '../lib/sounds/dial-up-modem-02.mp3'
 
 export default class Home extends Component {
 
@@ -74,10 +75,16 @@ export default class Home extends Component {
                 {
                     showSignUp
                         ?
-                        <h1
-                            className="display-3 col-md-8">
-                            Welcome to Chatter, {user.name}
-                        </h1>
+
+                        <div className='col-md-8'>
+                            <h1 className="FadeInAol display-3">
+                                Welcome to Chatter, {user.name}
+                            </h1>
+                            <audio className="AolSound" controls autoPlay>
+                                <source src={aolSound} />
+                            </audio>
+                        </div>
+
                         :
                         <SignUp
                             createUser={this.createUserInfo}

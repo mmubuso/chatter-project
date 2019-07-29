@@ -10,6 +10,7 @@
     overflow-x: hidden;
 }
 
+
 .Messages h1{
     overflow: hidden;
     white-space: nowrap;
@@ -18,23 +19,40 @@
 
 /* Input field */
 #root .MessageInputField {
-    width: 85%;
+    margin-left: 2.5%;
+    width: 80%;
     display: inline-block;
+    font-size: 2em;
+    background:transparent;
+    border: none;
+    border-bottom-style: solid;
+    color: white;
+}
+
+#root .MessageInputField:focus,.MessageInputField:hover{
+    outline-color: transparent;
+    box-shadow: none;
 }
 
 /* submit button */
 #root .MessageSubmitButton {
     width: 10%;
     color: white;
-    border-radius: 1em;
-    border: 1px solid gray;
+    border-radius: 20em;
+    border: 1px none gray;
     background: rgb(32, 32, 32);
     margin: 0 2%;
+    font-size: 3em;
+}
+
+#root .MessageSubmitButton:hover{
+    font-size: 5em;
 }
 
 .MessagesContainer {
     height: 50vh;
-    background:  rgb(29, 29, 29);
+    background-image: url('https://images.unsplash.com/photo-1520034475321-cbe63696469a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1650&q=80');
+    background-size: cover;
     overflow-y: auto;
     overflow-x: hidden;
     border-radius: 1em;

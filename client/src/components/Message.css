@@ -1,9 +1,14 @@
 /* style for entire message boy */
 .MessageBody {
-    /* background-color: bisque; */
     margin-top: 0.5em;
+    min-height: 4em;
+    animation: popUp 0.5s;
 }
 
+@keyframes popUp {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
 /* Style button elements */
 .MsgBtn {
     display: inline-block;
@@ -13,16 +18,8 @@
 
 /* Style text in message */
 .descriptionMessage {
-    background-color: rgba(0, 0, 179, 0.493);
-    border-top-right-radius: 1em; 
-    border-bottom-right-radius: 1em;
-}
-
-/* */
-.userMessage {
-    background-color: rgba(0, 0, 179, 0.493);
-    border-top-left-radius: 1em; 
-    border-bottom-left-radius: 1em;
-    margin-right: 0.2em;
+    background-color: transparent;
+    border-radius: 1em; 
+    border: 1px solid whitesmoke;
 }
 
