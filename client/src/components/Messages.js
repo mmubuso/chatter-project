@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import axios from 'axios';
 import Message from './Message.js'
 import './Messages.css'
+import io from 'socket.io-client'
 
 export default class Messages extends Component {
 
@@ -14,19 +15,7 @@ export default class Messages extends Component {
     }
 
     //create a Message
-    createMessage = (event) => {
-        event.preventDefault()
-        if (this.input.value !== '') {
-            axios.post(`/api/channels/${this.props.activeGroup.channelId}/groups/${this.props.activeGroup._id}/messages`,
-                {
-                    user: this.props.currentUser,
-                    message: this.input.value
-                }
-            )
-            this.input.value = ''
-            this.props.getAllMessagesByGroupId()
-        }
-    }
+  
 
     //delete a message
     deleteMessage = (messageId) => {
@@ -36,13 +25,14 @@ export default class Messages extends Component {
             })
     }
 
+    //Scroll to bottom of page
     componentDidUpdate() {
         this.setScrollToBottomOfMessageContainer()
     }
    
-    //remove clear when component is unmounted
-    componentWillUnmount = () => {
-        window.this.props.clearThisInterval()
+    //start listening for data from socket
+    componentDidMount() {
+        this.getMessageFromWebSocketServer()
     }
 
     //Show newest images located at the bottom
@@ -50,10 +40,30 @@ export default class Messages extends Component {
         this.messegesContainer.scrollTop = 990000
     }
 
+    //establish connection to websocket
+    socket = io()
+
+    //send input message 
+    sendMessageToWebSocketServer = (event, message) => {
+        event.preventDefault()
+        if (message !== '') {
+            this.socket.emit('message', {
+                user: this.props.currentUser,
+                message: message
+            })
+            this.input.value = ''
+        }
+    }
+
+    //listen for messages from websocket server
+    getMessageFromWebSocketServer = () => {
+        this.socket.on('newMessage', (data) => {
+            this.props.createMessage(data)
+                .then((res) => this.props.updateMessagesState(res.data))
+        })
+    }
 
     render() {
-
-       
 
         let messagesList = this.props.messages.map(message => {
             return (
@@ -78,15 +88,17 @@ export default class Messages extends Component {
                     {messagesList}
                 </div>
                 <form
-                    className='messageForm'
-                    onSubmit={this.createMessage}>
+                    className='messageForm'>
                     <input
                         className='MessageInputField form-control'
                         type='text'
                         ref={inputElement =>
                             this.input = inputElement}
                     />
-                    <button className='btn MessageSubmitButton' onClick={(evt) => this.createMessage(evt)} >Send</button>
+                    <button
+                        className='btn MessageSubmitButton'
+                        onClick={(evt) => this.sendMessageToWebSocketServer(evt, this.input.value)}>
+                        Send</button>
                 </form>
 
             </div>

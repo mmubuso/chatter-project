@@ -3,7 +3,6 @@ import axios from 'axios'
 import Groups from './Groups.js'
 import Messages from './Messages.js'
 import './GroupsListContainer.css'
-
 export default class GroupsListContainer extends Component {
 
     state = {
@@ -32,18 +31,7 @@ export default class GroupsListContainer extends Component {
             () => {
                 this.getAllMessagesByGroupId()
                 this.showMessages()
-                this.runSetInterval()
             })
-    }
-
-    //Get new messages
-    runSetInterval = () => {
-        setInterval(this.getAllMessagesByGroupId,1500)
-    }
-
-    //Clear the set interval
-    clearSetInterval = () => {
-        window.clearInterval()
     }
 
     //toggle messages 
@@ -85,10 +73,23 @@ export default class GroupsListContainer extends Component {
         this.setState({ currentUser: userInfo.name })
     }
 
+    //create message
+    createMessage = (data) => {
+       return axios.post(`/api/channels/${this.state.activeGroup.channelId}/groups/${this.state.activeGroup._id}/messages`, data)
+    }
+
+
+    //Update Messages with new message
+    updateMessagesState = (data) => {
+        let messagelist = [...this.state.messages]
+        messagelist.push(data)
+        this.setState({messages: messagelist})
+    }
+
     render() {
 
         //Destructure channel object
-        let { name} = this.state.channel
+        let { name } = this.state.channel
 
 
         return (
@@ -106,7 +107,8 @@ export default class GroupsListContainer extends Component {
                             messages={this.state.messages}
                             currentUser={this.state.currentUser}
                             getAllMessagesByGroupId={this.getAllMessagesByGroupId}
-                            clearThisInterval={this.clearSetInterval}
+                            createMessage={this.createMessage}
+                            updateMessagesState={this.updateMessagesState}
                         />
                         : null
                 }
