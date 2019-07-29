@@ -68,7 +68,7 @@ export default class Message extends Component {
                             </div>
                             :
                             <div className='row'>
-                                <p className='col-md-10 messageText'>{user} : {this.state.newMessage.message}</p>
+                                <p className='col-md-10 messageText'><strong>{user}</strong>: {this.state.newMessage.message}</p>
                                 <div className='col-md-2 buttonsFA'>
                                     <FontAwesomeIcon icon={faEdit}
                                         //Update or edit message
