@@ -37,9 +37,16 @@ const server = app.listen(PORT, () => {
     console.log(`App is listening on PORT ${PORT}`)
 })
 
+//connect socke to current server
 const io = socket(server)
 
+//listen for connection to websocket
 io.on("connection", (socket) => {
-    console.log('Connected to socket')
+    console.log(`connected to Socket Id ${socket.id}`)
+    socket.on('disconnect', () => {
+        console.log('user disconnected')
+    })
+    socket.on('message', (data) => {
+        io.emit('newMessage', data)
+    })
 })
-
