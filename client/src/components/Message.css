@@ -23,3 +23,11 @@
     border: 1px solid whitesmoke;
 }
 
+/* make input field transparente */
+.messageEditField, .messageEditField:focus{
+    background-color: transparent;
+    outline-style: none;
+    box-shadow: none;
+    border: none;
+    color: white;
+}
