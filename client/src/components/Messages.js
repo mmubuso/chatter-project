@@ -47,9 +47,13 @@ export default class Messages extends Component {
     sendMessageToWebSocketServer = (event, message) => {
         event.preventDefault()
         if (message !== '') {
-            this.socket.emit('message', {
+            let messageData = {
                 user: this.props.currentUser,
                 message: message
+            }
+            this.props.createMessage(messageData)
+                .then((res) => {
+                this.socket.emit('message', res.data)
             })
             this.input.value = ''
         }
@@ -57,9 +61,8 @@ export default class Messages extends Component {
 
     //listen for messages from websocket server
     getMessageFromWebSocketServer = () => {
-        this.socket.on('newMessage', (data) => {
-            this.props.createMessage(data)
-                .then((res) => this.props.updateMessagesState(res.data))
+        this.socket.on('newMessage', (data) => { 
+            this.props.updateMessagesState(data)
         })
     }
 

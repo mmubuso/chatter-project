@@ -19,6 +19,7 @@ export default class GroupsListContainer extends Component {
         messages: [],
         currentUser: 'Anon'
     }
+
     //Code to run when component mounts
     componentDidMount() {
         this.getChannelInformation()
@@ -75,15 +76,17 @@ export default class GroupsListContainer extends Component {
 
     //create message
     createMessage = (data) => {
-       return axios.post(`/api/channels/${this.state.activeGroup.channelId}/groups/${this.state.activeGroup._id}/messages`, data)
+        return axios.post(`/api/channels/${this.state.activeGroup.channelId}/groups/${this.state.activeGroup._id}/messages`, data)
     }
 
 
     //Update Messages with new message
     updateMessagesState = (data) => {
-        let messagelist = [...this.state.messages]
-        messagelist.push(data)
-        this.setState({messages: messagelist})
+        if (data.groupId === this.state.activeGroup._id) {
+            let messagelist = [...this.state.messages]
+            messagelist.push(data)
+            this.setState({ messages: messagelist })
+        }
     }
 
     render() {
