@@ -26,9 +26,9 @@ const pencilCounters = {
     description: 'Who wants to count pencils with me'
 }
 
-const howManyLicksDoesItTakeToGetToTheCenteOfTootsiePopGroup = {
-    name: 'How many licks does it take to get to the center of a tootsie pop',
-    description: 'You hava a tonge and we have pops, lets get too licking'
+const candyLovers = {
+    name: 'Candy Lovers',
+    description: 'A group for candy afficinados'
 }
 
 const weDoReactGroup = {
@@ -129,7 +129,7 @@ let deleteAllFiles = async () => {
 let createChannel = async () => {
     let firstChannel = await channelApi.createNewChannel(regularFolksChannel)
     let secondChannel = await channelApi.createNewChannel(developersCircleChannel)
-    await createGroup(firstChannel, pencilCounters, howManyLicksDoesItTakeToGetToTheCenteOfTootsiePopGroup)
+    await createGroup(firstChannel, pencilCounters, candyLovers)
     await createGroup(secondChannel, machinesCanLearn, weDoReactGroup)
 }
 
